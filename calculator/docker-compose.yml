@@ -110,4 +110,17 @@ services:
             replicas: 1
             restart_policy:
                 condition: on-failure
+    producerFastApi:
+      image: producer-fastapi
+      build:
+        context: .
+        dockerfile: ./producerFastApi/Dockerfile
+      ports:
+        - 5001:5001
+      environment:
+        - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      deploy:
+        replicas: 1
+        restart_policy:
+          condition: on-failure
 
